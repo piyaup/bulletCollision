@@ -17,30 +17,34 @@ function draw() {
   thickness = random(22,83)
   bullet.velocityX = speed;
   console.log("inside draw"); 
- 
-      if(hasCollided(bullet, wall) && bulletHit )  {
-        var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
-        console.log("inside if stmt damage :" + damage);
-        if(damage>10){
-        wall.shapeColor= color(255,0,0);     
-        }
-        if(damage<10) {
-          wall.shapeColor = color(0,255,0);
-        }     
-        bulletHit = false;
-      }
 
-      //  if(hasCollided(bullet, wall) && bulletHit )  {
-      //    var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
-      //     console.log("inside if stmt damage :" + damage);
-      //    if(damage>0.08){
-      //     wall.shapeColor= color(255,0,0);     
-      //    }
-      //    if(damage<0.08) {
-      //      wall.shapeColor = color(0,255,0);
-      //    }     
-      //    bulletHit = false;
-      //  }
+ // this for fast speed
+
+      // if(hasCollided(bullet, wall) && bulletHit )  {
+      //   var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
+      //   console.log("inside if stmt damage :" + damage);
+      //   if(damage>10){
+      //   wall.shapeColor= color(255,0,0);     
+      //   }
+      //   if(damage<10) {
+      //     wall.shapeColor = color(0,255,0);
+      //   }     
+      //   bulletHit = false;
+      // }
+
+       // this for slower speed
+
+       if(hasCollided(bullet, wall) && bulletHit )  {
+         var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
+          console.log("inside if stmt damage :" + damage);
+         if(damage>0.08){
+          wall.shapeColor= color(255,0,0);     
+         }
+         if(damage<0.08) {
+           wall.shapeColor = color(0,255,0);
+         }     
+         bulletHit = false;
+       }
     
    drawSprites();
 }
