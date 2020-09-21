@@ -1,5 +1,7 @@
 
 var bullet,wall,speed,weight,thickness;
+var bulletHit=true;
+
 function setup() {
   createCanvas(1600,400);
   bullet = createSprite(50,200,50,25);
@@ -16,31 +18,30 @@ function draw() {
   bullet.velocityX = speed;
   console.log("inside draw"); 
  
-       if(hasCollided(bullet, wall))  {
-         var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
-         if(damage>10){
-          wall.shapeColor= color(255,0,0);     
-         }
-         if(damage<10) {
-           wall.shapeColor = color(0,255,0);
-         }     
+      if(hasCollided(bullet, wall) && bulletHit )  {
+        var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
+        console.log("inside if stmt damage :" + damage);
+        if(damage>10){
+        wall.shapeColor= color(255,0,0);     
+        }
+        if(damage<10) {
+          wall.shapeColor = color(0,255,0);
+        }     
+        bulletHit = false;
+      }
 
-
-       }
-    // if(wall.x-bullet.x < (bullet.width+wall.width)/2) {
-    //   bullet.velocityX = 0;
-    //   var deformation= 0.5 * weight * speed * speed /22509;
-
-    //     if(deformation>8) {
-    //       wall.shapeColor = color(255,0,0);
-    //     }
-    //     if(deformation<8 && deformation>5) {
-    //       wall.shapeColor = color(230,230,0);
-    //     }
-    //     if(deformation<5) {
-    //       wall.shapeColor = color(0,255,0);
-    //     }
-    // }
+      //  if(hasCollided(bullet, wall) && bulletHit )  {
+      //    var damage = 0.5 * weight * speed * speed/(thickness * thickness * thickness);
+      //     console.log("inside if stmt damage :" + damage);
+      //    if(damage>0.08){
+      //     wall.shapeColor= color(255,0,0);     
+      //    }
+      //    if(damage<0.08) {
+      //      wall.shapeColor = color(0,255,0);
+      //    }     
+      //    bulletHit = false;
+      //  }
+    
    drawSprites();
 }
 
@@ -55,7 +56,10 @@ function reset()
 
 function hasCollided(bullet, wall) {
   bulletRightEdge=bullet.x+bullet.width;
-  wallLeftEdge=wall.x; {
+  wallLeftEdge=wall.x;
+  if(bulletRightEdge >= wallLeftEdge)
+  {
+    bullet.velocityX = 0;
     return true
   } 
   return false;
